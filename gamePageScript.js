@@ -61,7 +61,7 @@ function generateAlphabets() {
  {
      alphaButtons[i]=`<button id='` + a[i] + `' onClick="GuessLetter('` + a[i] + `')">` + a[i] + `</button>`;
  }
- alphaButtons=alphaButtons.join();
+ alphaButtons=alphaButtons.join(' ');
     console.log(alphaButtons)
 
   document.getElementById('alphabets').innerHTML = alphaButtons;
