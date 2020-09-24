@@ -1,0 +1,28 @@
+
+
+   h1{
+       color:chocolate ;
+      } 
+
+    #wrapper{
+        background-color: aqua;
+        height: 1000px;
+        text-align: center;
+    }    
+
+   h3{
+       color: crimson;
+   }   
+
+  #play_button{
+     background-color:coral;
+       width: 80px;
+       height: 30px;
+       text-decoration: darkcyan;
+       text-align: center;
+  } 
+  img{
+      width: 150px;
+      height: 150px;
+  }
+
