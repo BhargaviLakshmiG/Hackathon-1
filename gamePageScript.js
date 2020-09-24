@@ -8,13 +8,15 @@ var hmimg=document.createElement("img");
 hmimg.setAttribute("src","first.jpg")
 
 var text=document.createElement("h3");
-text.innerHTML="GUESS THE BELOW WORD ";
+text.innerHTML="GUESS THE  WORD ";
+
+var guessWord=document.createElement("p");
+guessWord.setAttribute("id","guessWord");
 
 var alphlist=document.createElement("div");
 alphlist.setAttribute("id","alphabets");
-//alphlist.setAttribute("value","buttons")
-//alphlist.append(buttons)
-wrap.append(h,hmimg,text,alphlist);
+
+wrap.append(h,hmimg,text,guessWord,alphlist);
 
 document.body.append(wrap);
 
@@ -24,7 +26,7 @@ document.body.append(wrap);
 var words_list= [
 	      "awkward",
 	      "avenge",
-	      "backstab",
+	      "beautiful",
 	      "control",
 	      "dream",
 	      "future",
@@ -33,28 +35,61 @@ var words_list= [
 	      "iguana",
 	      "jelly",
 	      "mountain",
-	      "smile",
+          "smile",
+          "refresh",
 	      "tribute",
-	      "venture"
+          "venture"
 ]
 
-
-let answer = '';
+let a='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+let answerWord = '';
 let maxWrong = 6;
 let mistakes = 0;
+let guessed = [];
+
+
 
 function randomWord() {
-  answer = words_list[Math.floor(Math.random() * words_list.length)];
+  answerWord = words_list[Math.floor(Math.random() * words_list.length)];
+  console.log(answerWord)
 }
 
-function generateButtons() {
-  let buttonsHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(letter =>
-    `
-      <button id='` + letter + `'>` + letter + `</button>`).join('');
+function generateAlphabets() {
+    let alphaButtons=[];
+    console.log(a.split('').length)
+ for(var i=0;i<a.split('').length;i++)
+ {
+     alphaButtons[i]=`<button id='` + a[i] + `' onClick="GuessLetter('` + a[i] + `')">` + a[i] + `</button>`;
+ }
+ alphaButtons=alphaButtons.join();
+    console.log(alphaButtons)
 
-  document.getElementById('alphabets').innerHTML = buttonsHTML;
+  document.getElementById('alphabets').innerHTML = alphaButtons;
 }
 
 
 
-generateButtons();
+function GuessLetter(selLetter) {
+    guessed.indexOf(selLetter) === -1 ? guessed.push(selLetter) : null;
+    document.getElementById(selLetter).setAttribute('disabled', true);
+  
+    if (answerWord.indexOf(selLetter) >= 0) {
+      guessedWordBlank();
+     
+    } else if (answerWord.indexOf(selLetter) === -1) {
+      mistakes++;
+     
+    }
+  }
+
+
+function guessWordBlank() {
+   let wordBlank = answerWord.split('').map(letter => (guessed.indexOf(letter) >= 0 ? letter : " _ ")).join('');
+  
+    document.getElementById('guessWord').innerHTML = wordBlank;
+  }
+
+
+randomWord();
+guessWordBlank();
+generateAlphabets();
