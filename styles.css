@@ -1,11 +1,16 @@
 
 
    h1{
-       color:chocolate ;
+       color: black;
+       font-family: fantasy;
+       
+       font-weight: 35px;
+       font-style: oblique;
+       font-size: 60px;
       } 
 
     #wrapper{
-        background-color: aqua;
+        background-color: yellowgreen;
         height: 1000px;
         text-align: center;
     }    
@@ -18,11 +23,40 @@
      background-color:coral;
        width: 80px;
        height: 30px;
-       text-decoration: darkcyan;
+       text-decoration:gray
        text-align: center;
   } 
   img{
       width: 150px;
       height: 150px;
   }
+
+  #alphabets{
+    color: firebrick;
+    font-size: 24px;
+  }
+
+ label{
+     position: relative;
+     color: firebrick;
+     float: right;
+     margin-top: -185px;
+     margin-right: 90px;
+     font-size: 18px;
+ }
+
+
+ @media (max-width: 760px) {
+    #countSec {
+        padding:0 0 0 15px;
+    }
+    }
+  
+  @media (max-width: 480px) {
+    #countSec {
+    padding:0 0 0 25px;
+  }
+    }
+
+
 
