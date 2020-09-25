@@ -4,6 +4,7 @@ let answerWord = '';
 let maxWrong = 6;
 let mistakes = 0;
 let correct=0;
+let wrong=0;
 let guessed = [];
 let wordBlank=null;
 
@@ -14,20 +15,21 @@ var h=document.createElement("h1");
 h.innerHTML="HANGMAN";
 
 
-/*var res=document.createElement("div");
-res.setAttribute("id","guessCount")
-res.setAttribute("value","wrong guess")
-var mis=document.createElement("span");
-res.setAttribute("id","mistakes");
-var corr=document.createElement("span");
-corr.setAttribute("id","correct");
-
-res.append(mis,correct);*/
-
-
 var hmimg=document.createElement("img");
 hmimg.setAttribute("id","hmImg")
-hmimg.setAttribute("src","first.jpg")
+hmimg.setAttribute("src","onload.jpg")
+
+var countSec=document.createElement("div");
+countSec.setAttribute("id","countSection");
+var wronglabel=document.createElement("label");
+wronglabel.setAttribute("id","wrongCount");
+wronglabel.innerText="WRONG GUESS:"+mistakes;
+var br=document.createElement("br")
+var correctLabel=document.createElement("label");
+correctLabel.setAttribute("id","correctCount");
+correctLabel.innerHTML="CORRECT GUESS :"+correct;
+
+countSec.append(wronglabel,br,correctLabel);
 
 var text=document.createElement("h3");
 text.setAttribute("id","txt")
@@ -39,7 +41,7 @@ guessWord.setAttribute("id","guessWord");
 var alphlist=document.createElement("div");
 alphlist.setAttribute("id","alphabets");
 
-wrap.append(h,hmimg,text,guessWord,alphlist);
+wrap.append(h,hmimg,countSec,text,guessWord,alphlist);
 
 document.body.append(wrap);
 
@@ -64,8 +66,11 @@ var words_list= [
           "EGYPT",
           "FINLAND",
           "HUNGARY",
-          "GREECE"
+          "GREECE",
+          "CUBA"
 ]
+
+
 
 randomWord();
 generateAlphabets();
@@ -91,19 +96,23 @@ function generateAlphabets() {
 
 function GuessLetter(selLetter) {
     console.log(guessed.indexOf(selLetter)+" "+selLetter+"HERE")
+    console.log("COrrect"+correct+" "+mistakes)
     guessed.indexOf(selLetter) === -1 ? guessed.push(selLetter) : null;
     document.getElementById(selLetter).setAttribute('disabled', true);
      
     if (answerWord.indexOf(selLetter) >= 0) {
+        correct++;
        var w=guessBlankWord();
               checkforWin(w);
       } else if (answerWord.indexOf(selLetter) === -1) {
         mistakes++;
-        
         checkforLost();
         console.log("mist  "+mistakes)
            updatePic();
       }
+
+      document.getElementById("wrongCount").innerText="WRONG GUESS :"+mistakes;
+      document.getElementById("correctCount").innerText="CORRECT GUESS:"+correct;
   }
 
 
@@ -114,28 +123,24 @@ function guessBlankWord() {
   }
 
   function updatePic(){
-      document.getElementById("hmImg").src=  mistakes + '.jpg';
-  }
+      document.getElementById("hmImg").src=  mistakes + '.png';
+      }
 
 
   function checkforWin(w) {   
    if (w == answerWord) 
    {
-     document.getElementById('alphabets').innerHTML = 'YAY !! You  have Won!!!';
-      var b=document.createElement("br");      
-     var pagain=document.createElement("button");   
-     pagain.setAttribute("id","play_again");
-     pagain.innerHTML="PLAY AGAIN"
-     pagain.setAttribute("onClick","resetGame()")
-     wrap.append(b,pagain)
-      }
+     document.getElementById('alphabets').innerHTML = 'YAY!! YOU  HAVE  WON!!!';
+     playAgain();
+           }
     }
 
 
   function checkforLost() {
     if (mistakes === maxWrong) {
       document.getElementById('txt').innerHTML = "Correct Word is " + answerWord;
-      document.getElementById('alphabets').innerHTML = "SORRY!!You HAVE LOST";
+      document.getElementById('alphabets').innerHTML = "SORRY!!YOU HAVE LOST :(";
+      playAgain();
     }
   }
 
@@ -147,8 +152,17 @@ function guessBlankWord() {
 
   function resetGame() {
       console.log("PLAY AGAIN");
-      window.location.href = 'gamePage.html'
-    }
+      window.location.href = 'gamePage.html';
+          }
+
+  function playAgain(){
+    var b=document.createElement("br");      
+    var pagain=document.createElement("button");   
+    pagain.setAttribute("id","play_again");
+    pagain.innerHTML="PLAY AGAIN"
+    pagain.setAttribute("onClick","resetGame()")
+    wrap.append(b,pagain)
+  }
   
 
 
