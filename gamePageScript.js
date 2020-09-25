@@ -96,7 +96,6 @@ function generateAlphabets() {
 
 function GuessLetter(selLetter) {
     console.log(guessed.indexOf(selLetter)+" "+selLetter+"HERE")
-    console.log("COrrect"+correct+" "+mistakes)
     guessed.indexOf(selLetter) === -1 ? guessed.push(selLetter) : null;
     document.getElementById(selLetter).setAttribute('disabled', true);
      
@@ -107,7 +106,6 @@ function GuessLetter(selLetter) {
       } else if (answerWord.indexOf(selLetter) === -1) {
         mistakes++;
         checkforLost();
-        console.log("mist  "+mistakes)
            updatePic();
       }
 
@@ -145,13 +143,11 @@ function guessBlankWord() {
   }
 
   function updateMistakes() {
-      console.log(document.getElementById('mistakes'))
-    document.getElementById('mistakes').innerHTML = mistakes;
+          document.getElementById('mistakes').innerHTML = mistakes;
   }
 
 
   function resetGame() {
-      console.log("PLAY AGAIN");
       window.location.href = 'gamePage.html';
           }
 
